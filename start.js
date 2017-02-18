@@ -1,16 +1,10 @@
 var keystone = require('keystone');
 var cfg = require('./config')
 
-process.env.NODE_ENV = "production"
-process.env.PORT = 80
-
 keystone.init({
 
     'name': 'ptspzy',
     'brand': 'Demo',
-
-    // 'env': process.env.NODE_ENV || "development",
-    // 'port': process.env.PORT || 80,
 
     'favicon': 'public/favicon.ico',
     'less': 'public',
@@ -40,7 +34,7 @@ keystone.import('models');
 
 keystone.set('locals', {
     _: require('lodash'),
-    env: keystone.get('env'),
+    env: keystone.get('env') || "production",
     utils: keystone.utils,
     editable: keystone.content.editable,
     ga_property: keystone.get('ga property'),
@@ -51,8 +45,6 @@ keystone.set('locals', {
 
 keystone.set('routes', require('./routes'));
 
-// keystone.set('port', process.env.PORT || 3000);
-
 keystone.set('nav', {
     'posts': ['posts', 'post-comments', 'post-categories'],
     'galleries': 'galleries',
@@ -60,5 +52,7 @@ keystone.set('nav', {
     'users': 'users',
     'field-tests': 'things'
 });
+
+//keystone.set('port', '80')
 
 keystone.start();
