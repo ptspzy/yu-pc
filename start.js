@@ -1,5 +1,5 @@
 var keystone = require('keystone');
-
+var cfg = require('./config')
 
 process.env.NODE_ENV = "production"
 process.env.PORT = 80
@@ -20,8 +20,8 @@ keystone.init({
     'view engine': 'pug',
 
     'auto update': true,
-    'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/ptspzy',
-    'cloudinary config': 'cloudinary://139494376698928:lmUei4-UwFu5atPYg7yvUu2I_x8@dce0nrfeu',
+    'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || cfg.mongodb_uri,
+    'cloudinary config': cfg.cloudinary_uri,
 
     'session': true,
     'auth': true,
